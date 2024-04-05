@@ -5,7 +5,7 @@ export const SubforumValidator = z.object({
 })
 
 export const SubforumSubscriptionValidator = z.object({
-    SubforumId: z.string()
+    subforumId: z.string()
 })
 
 export type CreateSubforumPayload = z.infer<typeof SubforumValidator>
