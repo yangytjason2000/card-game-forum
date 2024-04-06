@@ -3,6 +3,7 @@ import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 import MiniCreatePost from '@/components/MiniCreatePost';
+import PostFeed from '@/components/PostFeed';
 
 interface pageProps {
   params: {
@@ -38,8 +39,7 @@ const page = async ({params}: pageProps) => {
             c/{subforum.name}
         </h1>
         <MiniCreatePost session={session} />
-
-        {/*Todo: show posts in user feed*/}
+        <PostFeed initialPosts={subforum.posts} subforumName={subforum.name}/>
     </>
 }
 
