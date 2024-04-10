@@ -8,7 +8,11 @@ export async function POST(req: Request) {
         const session = await getAuthSession()
 
         if(!session?.user) {
-            return new Response('Unauthorized', { status: 401})
+            return new Response('Not logged in', { status: 401})
+        }
+
+        if (session.user.type !== 'ADMIN') {
+            return new Response('Unauthorized', {status: 401})
         }
 
         const body = await req.json()
