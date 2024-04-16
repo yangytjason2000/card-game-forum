@@ -77,7 +77,7 @@ const Page = () => {
             <div>
                 <p className="text-lg font-medium">Name</p>
                 <p className="text-xs pb-2">
-                    Community name can't be changed once created
+                    Community name cannot be changed once created
                 </p>
 
                 <div className="relative">
