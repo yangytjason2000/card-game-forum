@@ -42,6 +42,13 @@ const Page = () => {
                     })
                 }
                 if (err.response?.status === 401) {
+                    if (err.response?.data === 'Unauthorized') {
+                        return toast({
+                            title: "Unauthorized",
+                            description: "You need to be an admin to create community",
+                            variant: "destructive",
+                        })
+                    }
                     return loginToast()
                 }
             }

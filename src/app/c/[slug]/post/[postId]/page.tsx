@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/Button";
 import { db } from "@/lib/db";
 import { redis } from "@/lib/redis";
 import { formatTimeToNow } from "@/lib/utils";
-import { CachePost } from "@/types/redis";
+import { CachedPost } from "@/types/redis";
 import { Post, User, Vote } from "@prisma/client";
 import { ArrowBigDown, ArrowBigUp, Loader2 } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -23,7 +23,7 @@ export const fetchCache = "force-no-store";
 const page = async ({ params }: pageProps) => {
 	const cachedPost = (await redis.hgetall(
 		`post:${params.postId}`
-	)) as CachePost;
+	)) as CachedPost;
 
 	let post: (Post & { votes: Vote[]; author: User }) | null = null;
 

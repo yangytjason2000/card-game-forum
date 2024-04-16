@@ -3,6 +3,7 @@ import { db } from "./db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google"
 import {nanoid} from "nanoid";
+import { UserType } from "@prisma/client";
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db),
@@ -26,6 +27,7 @@ export const authOptions: NextAuthOptions = {
                 session.user.email = token.email
                 session.user.image = token.picture
                 session.user.username = token.username
+                session.user.type = token.type as UserType | undefined
             }
 
             return session;
@@ -59,6 +61,7 @@ export const authOptions: NextAuthOptions = {
                 email: dbUser.email,
                 picture: dbUser.image,
                 username: dbUser.username,
+                type: dbUser.type,
             }
         },
         redirect() {

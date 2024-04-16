@@ -17,6 +17,23 @@ const Navbar = async () => {
             Cardforum
           </p>
         </Link>
+        <div className="flex items-center gap-10">
+          <Link href="/c/announcement" className="flex items-center">
+            <p className="hidden text-zinc-700 text-sm font-small md:block">
+              Announcement
+            </p>
+          </Link>
+          <Link href="/c/contribution" className="flex items-center">
+            <p className="hidden text-zinc-700 text-sm font-small md:block">
+              Contribution
+            </p>
+          </Link>
+          <Link href="/c/discussion" className="flex items-center">
+            <p className="hidden text-zinc-700 text-sm font-small md:block">
+              Discussion
+            </p>
+          </Link>
+        </div>
 
         {/* {search bar} */}
         <SearchBar/>
