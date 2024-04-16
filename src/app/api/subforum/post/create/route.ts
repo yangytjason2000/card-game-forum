@@ -14,7 +14,16 @@ export async function POST(req: Request) {
         const body = await req.json()
 
         const { subforumId, title, content } = PostValidator.parse(body)
+        
+        const subforum = await db.subforum.findFirst({
+            where: {
+                id: subforumId
+            }
+        })
 
+        if (subforum?.name === "announcement" && session.user.type !== 'ADMIN') {
+            return new Response('Unauthorized', {status: 401})
+        }
         const subscriptionExists = await db.subscription.findFirst({
             where: {
                 subforumId,
