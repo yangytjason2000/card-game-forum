@@ -41,7 +41,7 @@ const page = async ({params}: pageProps) => {
         <h1 className='font-bold text-3xl md:text-4xl h-14'>
             c/{subforum.name}
         </h1>
-        <MiniCreatePost session={session} />
+        {!(subforum?.name === "announcement" && session?.user.type !== "ADMIN") ? <MiniCreatePost session={session} /> : null}
         <PostFeed initialPosts={subforum.posts} subforumName={subforum.name}/>
     </>
 }
