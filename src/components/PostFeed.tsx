@@ -9,6 +9,7 @@ import axios from "axios";
 import { Vote } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Post from "./Post";
+import { Loader2 } from "lucide-react";
 
 interface PostFeedProps {
 	initialPosts: ExtendedPost[];
@@ -24,7 +25,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subforumName }) => {
 
 	const { data: session } = useSession();
 	const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-		["infinite-query"],
+		["infinite-query", subforumName],
 		async ({ pageParam = 1 }) => {
 			const query =
 				`/api/posts?limit=${INFINITE_SCROLLING_PAGIINATION_RESULTS}&page=${pageParam}` +
@@ -87,6 +88,12 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subforumName }) => {
 					);
 				}
 			})}
+
+			{isFetchingNextPage && (
+				<li className="flex justify-center">
+					<Loader2 className="w-6 h-6 text-zinc-500 animate-spin" />
+				</li>
+			)}
 		</ul>
 	);
 };
